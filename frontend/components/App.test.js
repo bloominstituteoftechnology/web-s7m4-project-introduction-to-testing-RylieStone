@@ -14,17 +14,102 @@ describe('Module 4 Project Tests', () => {
       render(<App lang="en" />)
       expect(screen.getByText("Create an Account")).toBeVisible()
     })
+    test('form is visable to the user', () => {
+      render(<App lang="en" />)
+      expect(screen.getByLabelText("Username:")).toBeVisible()
+      expect(screen.getByPlaceholderText("Type username")).toBeVisible()
+      expect(screen.getByText("Favorite language:")).toBeVisible()
+      expect(screen.getByText("JavaScript")).toBeVisible()
+      expect(screen.getByText("Rust")).toBeVisible()
+      expect(screen.getByLabelText("Favorite food:")).toBeVisible()
+      expect(screen.getByText("-- Select favorite food --")).toBeVisible()
+      expect(screen.getByText("Pizza")).toBeVisible()
+      expect(screen.getByText("Spahgetti")).toBeVisible()
+      expect(screen.getByText("Broccoli")).toBeVisible()
+      expect(screen.getByLabelText("Agree to our terms")).toBeVisible()
+      expect(screen.getByText("send")).toBeVisible()
+    })
   })
   describe('Spanish Language', () => {
+    test('spanish create a account is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Crear Cuenta")).toBeVisible()
+    })
+    test('spanish username is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByLabelText("Usuario")).toBeVisible()
+    })
+    test('spanish username placeholder is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByPlaceholderText("Escriba usuario")).toBeVisible()
+    })
+    test('spanish favorite language is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Lenguaje favorito:")).toBeVisible()
+    })
+    test('spanish Javascript language is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("JavaScript")).toBeVisible()
+    })
+    test('spanish Rust language is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Rust")).toBeVisible()
+    })
+    test('spanish favorite food is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByLabelText("Plato favorito:")).toBeVisible()
+    })
+    test('spanish food 1 is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("-- Elija su plato favorito --")).toBeVisible()
+    })
+    test('spanish food 2 is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Pizza")).toBeVisible()
+    })
+    test('spanish food 3 is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Espaguetis")).toBeVisible()
+    })
+    test('spanish food 4 is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Brócolis")).toBeVisible()
+    })
+    test('spanish accept terms is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Acepto condiciones")).toBeVisible()
+    })
+    test('spanish submit is visable', () => {
+      render(<App lang="esp"/>)
+      expect(screen.getByText("Enviar")).toBeVisible()
+    })
     /*
       👉 TASK 3
 
       This is done after making the UI multilingual.
     */
+    // "TEXT_SUBMIT": "Enviar",
   })
   describe('getEntriesByKeyPrefix', () => {
     test('can extract the correct data', () => {
-    /*
+    const obj = {
+      abc_1: "data_abc_1",
+      abc_2: "data_abc_2",
+      xyz_1: "data_xyz_1",
+      abc_3: "data_abc_3",
+    }
+    const expected = [
+      ["abc_1", "data_abc_1"],
+      ["abc_2", "data_abc_2"],
+      ["abc_3", "data_abc_3"],
+    ]
+    const expected2 = [
+      ["xyz_1", "data_xyz_1"]
+    ]
+      expect(getEntriesByKeyPrefix(obj, "abc")).toEqual(expected)
+      expect(getEntriesByKeyPrefix(obj, "xyz")).toEqual(expected2)
+      expect(getEntriesByKeyPrefix(obj, "foo")).toEqual([])
+      /*
       👉 TASK 4 part 2
 
       Implement the function `getEntriesByKeyPrefix` below
@@ -39,6 +124,10 @@ describe('Module 4 Project Tests', () => {
   })
 })
 function getEntriesByKeyPrefix(obj, keyPrefix) {
+  return Object.entries(obj).filter(([key]) => key.split('_')[0] === keyPrefix)
+  
+  
+  
   /*
     👉 TASK 4 part 1
 
